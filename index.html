@@ -1781,7 +1781,7 @@ html>body{padding:0}</style>
 })();
 </script>
 <div id="busan-coastal-trip" lang="zh-Hant">
-  <header class="coast-header"><img data-art="busan-coast" alt="水彩風格的釜山海岸與廣安大橋"><div class="trip-heading"><span class="eyebrow">BUSAN · FAMILY JOURNEY</span><h1>一起去釜山，慢慢玩。</h1><p>2026.10.22 — 10.27｜六天五夜</p></div></header>
+  <header class="coast-header"><div class="coast-scene" data-motion="running"><img data-art="busan-coast" alt="水彩風格的釜山海岸與廣安大橋"><svg class="coast-waves" viewBox="0 0 1200 100" preserveAspectRatio="none" aria-hidden="true"><g class="wave-drift"><path d="M-400 52 Q-300 30 -200 52 T0 52 T200 52 T400 52 T600 52 T800 52 T1000 52 T1200 52 T1400 52 T1600 52" /><path d="M-400 78 Q-300 59 -200 78 T0 78 T200 78 T400 78 T600 78 T800 78 T1000 78 T1200 78 T1400 78 T1600 78" /></g></svg><span class="coast-gull gull-one" aria-hidden="true"><svg viewBox="0 0 56 24"><path d="M3 17 Q15 2 28 17 Q41 2 53 17"/></svg></span><span class="coast-gull gull-two" aria-hidden="true"><svg viewBox="0 0 56 24"><path d="M3 17 Q15 2 28 17 Q41 2 53 17"/></svg></span><button type="button" class="motion-toggle" aria-label="暫停海景動畫" aria-pressed="false">暫停動畫</button></div><div class="trip-heading"><span class="eyebrow">BUSAN · FAMILY JOURNEY</span><h1>釜山家庭旅遊🏝️</h1><p>2026.10.22 — 10.27｜六天五夜</p></div></header>
   <div class="trip-main">
     <aside class="pass-strip" aria-label="BIG3適用景點"><span class="pass-title"><i data-lucide="ticket" aria-hidden="true"></i> BIG3 適用</span><span>Day4 SpaLand <b>A</b></span><span>Day4 松島纜車 <b>B</b></span><span>Day5 ARTE <b>B</b></span></aside>
     <nav class="day-tabs" aria-label="選擇日期">
@@ -2445,6 +2445,30 @@ html>body{padding:0}</style>
     .getElementById("codex-visualization-lucide")
     ?.addEventListener("load", initialize, { once: true });
 })();
+</script>
+
+
+<style id="coastal-header-motion">
+#busan-coastal-trip .coast-scene{position:absolute;inset:0 0 auto;height:124px;overflow:hidden;background:#dbeef3}
+#busan-coastal-trip .coast-scene>img{width:100%;height:100%;object-fit:cover;object-position:center 59%;display:block}
+#busan-coastal-trip .coast-waves{position:absolute;inset:auto 0 4px;width:100%;height:38px;opacity:.4;pointer-events:none}
+#busan-coastal-trip .wave-drift{animation:coast-ripple 9s ease-in-out infinite alternate}
+#busan-coastal-trip .coast-waves path{fill:none;stroke:#fff;stroke-width:2}
+#busan-coastal-trip .coast-waves path+path{opacity:.55;stroke-width:1.5}
+#busan-coastal-trip .coast-gull{position:absolute;left:-10%;top:20%;width:32px;height:16px;pointer-events:none;animation:coast-flight 25s linear infinite}
+#busan-coastal-trip .coast-gull svg{width:100%;height:100%;overflow:visible;animation:coast-wing 1.8s ease-in-out infinite alternate}
+#busan-coastal-trip .coast-gull path{fill:none;stroke:#fffdf6;stroke-width:3;stroke-linecap:round;filter:drop-shadow(0 1px 1px #35677a80)}
+#busan-coastal-trip .gull-two{top:35%;width:21px;animation-duration:31s;animation-delay:-12s}
+#busan-coastal-trip .motion-toggle{position:absolute;right:10px;bottom:9px;min-height:32px;padding:5px 10px;border:1px solid #ffffffaa;border-radius:20px;background:#ffffffde;color:#254e60;font:500 11px/1.3 system-ui,sans-serif;cursor:pointer}
+#busan-coastal-trip .motion-toggle:focus-visible{outline:3px solid #246b8e;outline-offset:2px}
+#busan-coastal-trip .coast-scene[data-motion="paused"] *{animation-play-state:paused!important}
+@keyframes coast-ripple{from{transform:translateX(-70px) translateY(1px);opacity:.6}to{transform:translateX(55px) translateY(-3px);opacity:1}}
+@keyframes coast-flight{0%{transform:translateX(0) translateY(0);opacity:0}8%{opacity:.9}50%{transform:translateX(420px) translateY(-9px)}92%{opacity:.9}100%{transform:translateX(900px) translateY(4px);opacity:0}}
+@keyframes coast-wing{from{transform:scaleY(.65) rotate(-4deg)}to{transform:scaleY(1) rotate(4deg)}}
+@media(prefers-reduced-motion:reduce){#busan-coastal-trip .coast-scene *{animation:none!important}#busan-coastal-trip .coast-gull,#busan-coastal-trip .motion-toggle{display:none}}
+</style>
+<script>
+(()=>{const scene=document.querySelector('#busan-coastal-trip .coast-scene');const toggle=scene.querySelector('.motion-toggle');toggle.addEventListener('click',()=>{const paused=scene.dataset.motion!=='paused';scene.dataset.motion=paused?'paused':'running';toggle.setAttribute('aria-pressed',String(paused));toggle.setAttribute('aria-label',paused?'播放海景動畫':'暫停海景動畫');toggle.textContent=paused?'播放動畫':'暫停動畫';});})();
 </script>
 
 </body>
